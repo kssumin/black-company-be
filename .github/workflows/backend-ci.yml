@@ -5,15 +5,15 @@ name: Backend CI
 # main 브랜치에 push, PR이 되었을 때 workflow 실행
 on:
   push:
-    branches: [ "main","be" ]
+    branches: [ "main","be","be-release"]
     paths : 'BE/**'
   pull_request:
-    branches: [ "main","be" ]
+    branches: [ "main","be","be-release"]
     paths : 'BE/**'
 
 defaults:
   run:
-    working-directory: BE/eeos
+    working-directory: ./BE/eeos
 
 jobs:
   build:
@@ -26,11 +26,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-
-    # gradlew에 실행 권한을 부여합니다.
-    - name: Grant execute permisson for gradlew
-      run: chmod +x gradlew
-      shell : bash
         
     # gradle caching - 빌드 시간 향상
     - name: Gradle Caching
@@ -45,8 +40,7 @@ jobs:
 
   # gradle build
     - name: Build with Gradle
-      working-directory : ./be/overflow
-      run: ./gradlew build -x test
+      run: ./gradlew build
 
     - name: 테스트 결과를 PR에 코멘트로 등록합니다
       uses: EnricoMi/publish-unit-test-result-action@v1
