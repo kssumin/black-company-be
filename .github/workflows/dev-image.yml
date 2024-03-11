@@ -22,7 +22,7 @@ jobs:
         run: ./gradlew build -Pprofile=dev
 
       - name: Docker 이미지 빌드
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/eeos-be:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/eeos-be-dev:latest .
         
       - name: DockerHub 로그인
         uses: docker/login-action@v2
@@ -31,4 +31,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Docker 이미지 푸시
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/eeos-be:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/eeos-be-dev:latest
