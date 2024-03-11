@@ -2,6 +2,9 @@ on:
   push:
     branches: ["be"]
     paths: 'BE/**'
+  pull_request:
+    branches: ["be"]
+    paths : 'BE/**'
 
 jobs:
   docker:
